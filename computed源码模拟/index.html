@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import Vue from "./vue.js";
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          num1: 1,
+          num2: 2,
+        },
+        computed: {
+          sum: {
+            get() {
+              console.log("计算");
+              return this.num1 + this.num2;
+            },
+          },
+        },
+        render(h) {
+          // return h("div", [
+          //   h("p", `sum is ${this.sum}`),
+          //   h("p", `sum is ${this.sum}`),
+          //   h(
+          //     "button",
+          //     {
+          //       on: {
+          //         click: () => {
+          //           this.num1++;
+          //         },
+          //       },
+          //     },
+          //     "num1++"
+          //   ),
+          // ]);
+          console.log("render");
+          const div = document.querySelector("#app");
+          const p1 = document.createElement("p");
+          p1.innerHTML = `sum is ${this.sum}`;
+          const p2 = document.createElement("p");
+          p2.innerHTML = `sum is ${this.sum}`;
+          const btn = document.createElement("button");
+          btn.innerHTML = "num1++";
+          btn.onclick = () => {
+            this.num1++;
+            console.log(this.num1);
+          };
+          div.innerHTML = "";
+          div.appendChild(p1);
+          div.appendChild(p2);
+          div.appendChild(btn);
+        },
+      });
+    </script>
+  </body>
+</html>
